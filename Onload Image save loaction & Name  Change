@@ -1,0 +1,21 @@
+//Admin Contorler code
+ public function UpdateProfile(Request $request){
+    $id = Auth::user()->id;
+    $adminData = User::find($id);
+    $adminData->name = $request->name;
+    $adminData->email = $request->email;
+    if($request->file('profile_image')){
+        $file = $request->file('profile_image');
+        $filename = date('ymdHi').$file->getClientOriginalName();
+        $file->move(public_path('uploads'),$filename);
+        $adminData['profile_image'] = $filename;
+    };
+    
+    $adminData->save();
+    $notification = array(
+       'message' =>'Sccessflly Updated',
+       'alert-type'=> 'info'
+    );
+    return redirect()->route('admin.profile')->with($notification);
+
+   }
