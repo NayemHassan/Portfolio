@@ -1,1 +1,39 @@
+//cdn 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.
+//form
 
+ <form action="{{route('update.profile')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <h4 class="card-title"> Update Your profile </h4>
+            <div class="row mb-3">
+                <label for="example-search-input" class="col-sm-2 col-form-label">Profile mage</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="profile_image" type="file" id ="image" placeholder="How do I shoot web" id="example-search-input"  value= "{{ $adminData->email }}">
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="row mb-3">
+                <label for="example-search-input" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                   <img class="rounded avatar-lg" id ="showImage" src="{{(!empty('$adminData->profile_image'))? url('uploads/'.$adminData->profile_image):url('uploads/images.png')}}" alt="profile">
+                </div>
+            </div>
+            <!-- end row -->
+            <input class="btn btn-success" type="submit" placeholder="How do I shoot web" id="example-search-input"  value= "Update Profile">
+
+          </form>
+
+
+// js code
+<script type = "text/javascript">
+
+$(document).ready(function(){
+$('#image').change(function(e){
+var reader = new FileReader();
+reader.onload = function(e){
+    $('#showImage').attr('src',e.target.result);
+}
+reader.readAsDataURL(e.target.files['0']);
+});
+});
+</script>
