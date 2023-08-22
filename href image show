@@ -1,0 +1,1 @@
+img   src="{{(!empty('$adminData->profile_image'))? url('uploads/'.$adminData->profile_image):url('uploads/images.png')}}" alt="profile">
