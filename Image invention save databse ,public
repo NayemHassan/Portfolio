@@ -1,0 +1,61 @@
+//before load this form  by controller and route
+//install image invention 
+//create model and controller and migration and database nake also fillable fillup 
+//use to form
+<form action="{{route('update.slide',$homeSlide->id)}}" method="POST" enctype="multipart/form-data">
+ @csrf
+<img  class="rounded avatar-lg" id = "showImage" src="
+ {{(!empty($homeSlide->img_slide))? url($homeSlide->img_slide) : url('uploads/images.jpg')}}" alt="Card image cap">
+//Route like this 
+Route::post('/Update/Slide{id},','UpdateSlide')->name('update.slide');
+//Controller Code /////////////////////////////////////////////////
+ public function HomeSlide(){
+        $id = Auth::user()->id;
+        $homeSlide = home_slide::find($id);
+        return view('frontend.Home.home_Slide',compact('homeSlide'));
+    }//End Method
+
+
+    public function UpdateSlide(Request $request){
+
+        $slide_id = $request->id;
+
+        if ($request->file('img_slide')) {
+            $image = $request->file('img_slide');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+
+            Image::make($image)->resize(636,852)->save('uploads/Home_slide/'.$name_gen);
+            $save_url = 'uploads/Home_slide/'.$name_gen;
+
+            home_slide::findOrFail($slide_id)->update([
+                'title' => $request->title,
+                'short_title' => $request->short_title,
+                'video_slide' => $request->video_url,
+                'img_slide' => $save_url,
+
+            ]);
+            $notification = array(
+            'message' => 'Home Slide Updated with Image Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+        } else{
+
+            home_slide::findOrFail($slide_id)->update([
+                'title' => $request->title,
+                'short_title' => $request->short_title,
+                'video_slide' => $request->video_url,
+
+            ]);
+            $notification = array(
+            'message' => 'Home Slide Updated without Image Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+     }
+
+    }
+
