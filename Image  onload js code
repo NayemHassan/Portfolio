@@ -1,5 +1,5 @@
 //cdn 
-      <form action="{{route('update.slide')}}"  method="post" enctype="multipart/form-data">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 //form
 
  <form action="{{route('update.profile')}}" method="post" enctype="multipart/form-data">
