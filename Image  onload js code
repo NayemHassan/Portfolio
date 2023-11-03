@@ -8,14 +8,14 @@
             <div class="row mb-3">
                 <label for="example-search-input" class="col-sm-2 col-form-label">Profile mage</label>
                 <div class="col-sm-10">
-                    <input class="form-control" name="profile_image" type="file" id ="image" placeholder="How do I shoot web" id="example-search-input"  value= "{{ $adminData->email }}">
+                    <input class="form-control" name="profile_image" type="file" id ="image"  id="example-search-input"  value= "">
                 </div>
             </div>
             <!-- end row -->
             <div class="row mb-3">
                 <label for="example-search-input" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                   <img class="rounded avatar-lg" id ="showImage" src="{{(!empty('$adminData->profile_image'))? url('uploads/'.$adminData->profile_image):url('uploads/images.png')}}" alt="profile">
+                   <img class="rounded avatar-lg" id ="showImage" src="{{(!empty($slideData->profileimage))?url('upload/admin_image/'.$slideData->profileimage):url('upload/no_image.jpg')}}" alt="profile">
                 </div>
             </div>
             <!-- end row -->
