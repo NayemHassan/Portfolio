@@ -1,0 +1,39 @@
+<!-------HTML ---->>>
+      <form action="{{route('store.multiImage')}}" method="post" enctype="multipart/form-data">
+      @csrf
+      <div class="row mb-3">
+          <label for="example-url-input" class="col-sm-2 col-form-label">Multi Imges</label>
+          <div class="col-sm-10">
+              <input class="form-control" name="multi_image[]" id="image" multiple=""  type="file" multiple="" id="example-url-input">
+          </div>
+      </div>
+      <!-- end row -->
+      <div class="row mb-3">
+          <label for="example-url-input" class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+          <img class="rounded avatar-lg" id ="showImage" src="{{url('upload/no_image.jpg')}}" alt="profile">
+          </div>
+      </div>
+      <!-- end row -->
+      <input type="submit" class="btn btn-info" value="Upload All Image ">
+      <!-- end row -->
+     </form>
+<!-------HTML ---->>>
+<!-------Controller ---->>>
+ public function StoreMultiImage(Request $request){
+        $Image=$request->file('multi_image');
+        foreach( $Image as $Multi_Image){
+            $name_gen=hexdec(uniqid()).'.'.$Multi_Image->getClientOriginalExtension();
+            Image::make($Multi_Image)->resize(235,235)->save('upload/multi_img/'.$name_gen);
+            $url_save='upload/multi_img/'.$name_gen;
+            MultiImage::insert([
+                'multiple_image'=>$url_save,
+                'created_at'=>Carbon::now(),
+            ]);
+        }//End Foreach
+        $notification = array(
+            'message' =>'Sccessflly MultiImage Uploded',
+            'alert-type'=> 'message'
+         );
+         return redirect()->back()->with($notification);
+    }
