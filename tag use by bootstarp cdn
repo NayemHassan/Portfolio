@@ -1,0 +1,12 @@
+/////////////////CDN/////////////////////
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" >
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js" ></script>
+////////////////////
+<style type="text/css">
+    .bootstrap-tagsinput .tag{
+        margin-right: 2px;
+        color: #b70000;
+        font-weight: 700px;
+    } 
+</style>
+<input name="blog_tags" value="home,tech" class="form-control" type="text" data-role="tagsinput">
