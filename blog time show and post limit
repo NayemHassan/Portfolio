@@ -1,4 +1,6 @@
 //insert er somoy database e time pathanur code 
+$allblog = App\Models\Blog::latest()->limit(3)->get();
+Insert er somoy database time e pathanur code
 use Carbon\Carbon;
 'created_at' =>Carbon::now(),
 Frontend e  Time show  Koranur Jonne 
