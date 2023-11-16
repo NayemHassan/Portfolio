@@ -5,3 +5,11 @@ use Carbon\Carbon;
 'created_at' =>Carbon::now(),
 Frontend e  Time show  Koranur Jonne 
 {{Carbon\Carbon::parse($item->created_at)->diffForHumans()}}
+
+//catagory gulu side e dekhanur jonne
+
+$category = BlogCatagory::orderBy('blog_catagory','ASC')->get();
+
+//separate post r blog dekhanur jonne data pass like web er post shob alada hobe ----
+$blogcat=Blog::where('blog_catagory_id',$id)->orderBy('id','DESC')->get();
+
