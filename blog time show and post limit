@@ -1,0 +1,5 @@
+//insert er somoy database e time pathanur code 
+use Carbon\Carbon;
+'created_at' =>Carbon::now(),
+Frontend e  Time show  Koranur Jonne 
+{{Carbon\Carbon::parse($item->created_at)->diffForHumans()}}
