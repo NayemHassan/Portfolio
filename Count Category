@@ -1,0 +1,4 @@
+@php
+ $countPost = App\Models\Blog::Where('blog_catagory_id',$cat->id)->count();
+ @endphp
+ {{ $countPost}}
