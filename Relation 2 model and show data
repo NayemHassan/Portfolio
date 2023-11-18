@@ -1,0 +1,6 @@
+public function category()
+{
+    return $this->belongsTo(BlogCatagory::class, 'blog_catagory_id', 'id');
+}
+
+{{ $item['category']['blog_catagory']}}
