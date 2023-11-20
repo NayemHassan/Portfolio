@@ -1,0 +1,15 @@
+   $request->validate([
+        'title' =>'required',
+        'short_description' =>'required',
+        'long_description' =>'required',
+        'service_image' =>'required',
+       ],[
+        'title' =>'Title field is Required ',
+        'short_description' =>'Short Description field is Required',
+        'long_description' =>'Long Description field is Required',
+        'service_image' =>'Image filled is Empty',
+       ]);
+
+@error('service_image')
+<span class="text-danger">{{$message}}</span>
+@enderror
