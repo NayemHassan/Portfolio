@@ -125,3 +125,24 @@
     });
 
 </script>
+////Controller code 
+public function StoreGallery(Request $request){
+        if ($request->gallery_image) {
+            $imageName = rand().'.'.$request->gallery_image->extension();
+            $request->gallery_image->move(public_path('uploads/gallery/'), $imageName);
+            $gallery = new Gallery;
+            $gallery->category_id = $request->category_name;
+            $gallery->title = $request->gallery_title;
+            $gallery->gallery_image = $imageName;
+            $gallery->save();
+            return response()->json([
+                'message' => 'Gallery Inserted Successfully',
+                'status' => 'success',
+            ]);
+            return response()->json([
+                'message' => 'Failed to insert gallery',
+                'status' => 'error',
+            ], 500);
+
+    return redirect()->route('gallery.view');
+    }
