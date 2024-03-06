@@ -1,0 +1,17 @@
+ public function DeleteSectionDetails( Request $request,$id){
+        $sectionDetails = SectionDetails::findOrFail($id);
+        $existingImageNames = explode(',', $sectionDetails->multi_image);
+
+        foreach ($existingImageNames as $imageName) {
+            $imagePath = public_path('uploads/multi_img/') . $imageName;
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+    $sectionDetails->delete();
+    $notification = array(
+        'message' => 'Section Details Successfully Deleted',
+        'alert-type' => 'info'
+    );
+    return redirect()->back()->with($notification);
+    }
