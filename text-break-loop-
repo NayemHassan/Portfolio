@@ -1,0 +1,8 @@
+    <td> @php
+    $text = $acountData->note ?? '';
+    $chunks = str_split($text, 40);
+    @endphp
+ @foreach ($chunks as $chunk)
+      {{ $chunk }}<br>
+  @endforeach
+  </td>
