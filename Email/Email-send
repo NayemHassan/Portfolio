@@ -1,0 +1,49 @@
+///Controller Code  ///'
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CustomerSendEmail;
+
+ public function CustomerSendEmail(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'message' => 'required',
+            'recipients' => 'required',
+
+        ]);
+        $data = [
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ];
+        $recipients = $request->input('recipients');
+            // dd($recipients);
+            foreach ($recipients as $recipient) { //Loop Using For Multiple mail send at a time
+                Mail::to($recipient)->send(new CustomerSendEmail($data));
+            }
+
+        $notification = array(
+            'message' => 'Email Send Successfully',
+            'alert-type' => 'info'
+        );
+        return redirect()->route('email.To.Customer.Page')->with($notification);
+    }
+///php artisan make:mail MyMail
+ public $data;
+    /**
+     * Create a new message instance.
+     */
+
+    public function __construct($data)
+    {
+        //
+        $this->data = $data;
+    }
+    /**
+     * Get the message envelope.
+     */
+    public function build()
+    {
+        $data = $this->data;
+
+      return $this->subject($this->subject)->view('pos.crm.email.customer_mail_message',compact('data'));
+    }
+also need  connection to env 
