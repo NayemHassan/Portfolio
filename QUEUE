@@ -38,3 +38,4 @@ $data = [
     }
 }
 //
+QUEUE_CONNECTION=database ///ENV r moddhe sync hobe na
